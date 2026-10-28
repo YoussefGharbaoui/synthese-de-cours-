@@ -392,27 +392,32 @@ export const InteractiveLab: React.FC = () => {
                             rx="8"
                           />
 
-                          {/* Threshold Lines */}
-                          <line x1={lowerBound} y1="15" x2={lowerBound} y2="125" stroke="#dc2626" strokeWidth="2" strokeDasharray="4 4" />
-                          <line x1={upperBound} y1="15" x2={upperBound} y2="125" stroke="#dc2626" strokeWidth="2" strokeDasharray="4 4" />
+                          {/* Threshold / Border Lines */}
+                          <line x1={lowerBound} y1="15" x2={lowerBound} y2="120" stroke="#dc2626" strokeWidth="2" strokeDasharray="4 4" />
+                          <line x1={upperBound} y1="15" x2={upperBound} y2="120" stroke="#dc2626" strokeWidth="2" strokeDasharray="4 4" />
 
-                          {/* Whisker Line */}
-                          <line x1={boxLeft} y1="70" x2={boxRight} y2="70" stroke="#78716c" strokeWidth="3" />
+                          {/* Whisker Lines (from Borders to Central Box) */}
+                          <line x1={Math.max(30, lowerBound)} y1="70" x2={boxLeft} y2="70" stroke="#047857" strokeWidth="2" />
+                          <line x1={boxRight} y1="70" x2={Math.min(870, upperBound)} y2="70" stroke="#047857" strokeWidth="2" />
+                          {/* Whisker end caps (Borders) */}
+                          <line x1={Math.max(30, lowerBound)} y1="55" x2={Math.max(30, lowerBound)} y2="85" stroke="#dc2626" strokeWidth="2" />
+                          <line x1={Math.min(870, upperBound)} y1="55" x2={Math.min(870, upperBound)} y2="85" stroke="#dc2626" strokeWidth="2" />
 
-                          {/* Box IQR */}
+                          {/* Central Box (IQR: Q1 to Q3) */}
                           <rect
                             x={boxLeft}
                             y="40"
-                            width={Math.max(4, boxRight - boxLeft)}
+                            width={Math.max(6, boxRight - boxLeft)}
                             height="60"
                             fill="#065f46"
+                            fillOpacity="0.85"
                             stroke="#047857"
                             strokeWidth="2"
-                            rx="6"
+                            rx="4"
                           />
 
-                          {/* Median Line */}
-                          <line x1={medianPos} y1="40" x2={medianPos} y2="100" stroke="#f59e0b" strokeWidth="3" />
+                          {/* Median Line inside Box */}
+                          <line x1={medianPos} y1="40" x2={medianPos} y2="100" stroke="#fbbf24" strokeWidth="3" />
 
                           {/* Individual Data Points */}
                           {parsedValues.map((v, i) => {
@@ -431,11 +436,11 @@ export const InteractiveLab: React.FC = () => {
                                 ) : (
                                   <circle
                                     cx={x}
-                                    cy={70 + ((i % 5) - 2) * 5}
-                                    r="5"
+                                    cy={70 + ((i % 5) - 2) * 4}
+                                    r="4.5"
                                     fill="#2563eb"
-                                    fillOpacity="0.8"
-                                    stroke="#1d4ed8"
+                                    fillOpacity="0.85"
+                                    stroke="#1e40af"
                                     strokeWidth="1.5"
                                   />
                                 )}
@@ -443,19 +448,33 @@ export const InteractiveLab: React.FC = () => {
                             );
                           })}
 
-                          {/* Labels */}
-                          <text x={lowerBound} y="135" fill="#dc2626" fontSize="10" textAnchor="middle" fontWeight="bold">
-                            Seuil Inf ({stats.outlierResult.lowerThreshold.toFixed(1)})
+                          {/* Descriptive Labels */}
+                          <text x={Math.max(40, lowerBound)} y="134" fill="#dc2626" fontSize="10" textAnchor="middle" fontWeight="bold">
+                            Borne Inf. (Border: {stats.outlierResult.lowerThreshold.toFixed(1)})
                           </text>
-                          <text x={upperBound} y="135" fill="#dc2626" fontSize="10" textAnchor="middle" fontWeight="bold">
-                            Seuil Sup ({stats.outlierResult.upperThreshold.toFixed(1)})
+                          <text x={boxLeft} y="32" fill="#065f46" fontSize="10" textAnchor="middle" fontWeight="bold">
+                            Q1 ({stats.quartiles.q1.toFixed(1)})
                           </text>
-                          <text x={medianPos} y="32" fill="#d97706" fontSize="11" textAnchor="middle" fontWeight="bold">
-                            Médiane {stats.median.toFixed(1)}
+                          <text x={medianPos} y="22" fill="#d97706" fontSize="11" textAnchor="middle" fontWeight="bold">
+                            Médiane ({stats.median.toFixed(1)})
+                          </text>
+                          <text x={boxRight} y="32" fill="#065f46" fontSize="10" textAnchor="middle" fontWeight="bold">
+                            Q3 ({stats.quartiles.q3.toFixed(1)})
+                          </text>
+                          <text x={Math.min(860, upperBound)} y="134" fill="#dc2626" fontSize="10" textAnchor="middle" fontWeight="bold">
+                            Borne Sup. (Border: {stats.outlierResult.upperThreshold.toFixed(1)})
                           </text>
                         </svg>
                       );
                     })()}
+                  </div>
+                  <div className="mt-2 text-xs text-stone-600 bg-stone-50 p-2.5 rounded-lg border border-stone-200 flex items-center justify-between">
+                    <span>
+                      <strong className="text-stone-800">Boîte centrale :</strong> Délimitée par <strong>Q1</strong> et <strong>Q3</strong> (50% des données).
+                    </span>
+                    <span>
+                      <strong className="text-red-700">Bornes (Borders) :</strong> Seuils extérieurs de détection (<span className="font-mono">Q1 - 1.5×IQR</span> et <span className="font-mono">Q3 + 1.5×IQR</span>), distincts de Q1 et Q3 !
+                    </span>
                   </div>
                 </div>
 

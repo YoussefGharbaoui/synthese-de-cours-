@@ -259,23 +259,25 @@ borne_sup_tukey = q3 + 3.0 * iqr        # 15.5
     moduleRef: 'Module 3',
     badge: 'Séance 03 • Boîte à Moustaches',
     title: 'Anatomie & Lecture d\'un Box Plot (Boîte à Moustaches)',
-    subtitle: 'La synthèse visuelle des 5 nombres clés de Tukey',
+    subtitle: 'Bien distinguer la boîte centrale (Q1-Q3) des bornes extérieures (borders)',
     bullets: [
-      '**Les 5 repères structurels fondamentaux** :',
-      '  1. *Bord inférieur de la boîte* : Premier quartile (25% des observations).',
-      '  2. *Ligne médiane intérieure* : Deuxième quartile (50% des observations).',
-      '  3. *Bord supérieur de la boîte* : Troisième quartile (75% des observations).',
-      '  4. *Hauteur de la boîte* : Représente visuellement l\'Écart Interquartile (IQR).',
-      '  5. *Moustaches (Whiskers)* : S\'étendent jusqu\'aux valeurs régulières situées dans la limite de 1.5 fois l\'IQR.',
-      '**Repérage visuel des Outliers** : Tout point représenté par un point isolé ou une croix à l\'extérieur des moustaches est un outlier certifié.',
-      '**Interprétation comparative rapide** : Deux boxplots côte à côte permettent de comparer instantanément la médiane, la dispersion et la symétrie de deux groupes.'
+      '**La Boîte Centrale (Box)** :',
+      '  • Encadrée par le premier quartile Q1 (25%) et le troisième quartile Q3 (75%).',
+      '  • Sa hauteur représente l\'Écart Interquartile (IQR) regroupant les 50% de données centrales.',
+      '  • La ligne médiane intérieure (Q2 à 50%) sépare la boîte en deux moitiés.',
+      '**Les Bornes Inférieure et Supérieure (Borders / Moustaches)** :',
+      '  • **Distinction essentielle** : Les bornes inférieure et supérieure représentent les frontières de tolérance ("borders"), et **non pas** les quartiles Q1 et Q3 !',
+      '  • *Borne inférieure (Lower border)* : Seuil de tolérance minimal (Q1 - 1.5 × IQR).',
+      '  • *Borne supérieure (Upper border)* : Seuil de tolérance maximal (Q3 + 1.5 × IQR).',
+      '  • Les moustaches (whiskers) s\'étendent de la boîte jusqu\'à ces bornes extérieures.',
+      '**Repérage visuel des Outliers** : Tout point situé **au-delà des bornes (en dehors des borders / moustaches)** est une valeur aberrante certifiée.'
     ],
     highlightBox: {
-      title: 'Guide de Lecture Rapide',
-      content: '• Boîte étirée = Forte dispersion des 50% centraux.\n• Médiane décentrée vers le bas = Asymétrie positive (queue à droite).\n• Points au-dessus des moustaches = Valeurs exceptionnellement élevées.',
+      title: 'Règle Fondamentale à Retenir',
+      content: '• Boîte centrale = Quartiles Q1 et Q3 (le cœur des 50% des données).\n• Bornes inf. et sup. = Les borders (frontières de détection des moustaches).\n• Points au-delà des borders = Valeurs aberrantes (outliers).',
       type: 'tip'
     },
-    tags: ['Box Plot', 'Moustaches', 'Visualisation', 'Quartiles']
+    tags: ['Box Plot', 'Borders', 'Bornes', 'Moustaches', 'Quartiles', 'Outliers']
   },
   {
     id: 11,
