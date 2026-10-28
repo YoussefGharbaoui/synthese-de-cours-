@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Systèmes Décisionnels M201 - Synthèse & Présentation Interactive</title>
+    <meta name="description" content="Synthèse de cours structurée et présentation interactive du module M201 : Statistiques décisionnelles, détection des anomalies, Machine Learning Naive Bayes, simulation Monte Carlo, langage R et Data Visualisation avancée." />
+    <meta property="og:title" content="Systèmes Décisionnels M201 - Synthèse & Présentation Interactive" />
+    <meta property="og:description" content="Synthèse de cours structurée et présentation interactive du module M201 : Statistiques décisionnelles, détection des anomalies, Machine Learning Naive Bayes, simulation Monte Carlo, langage R et Data Visualisation avancée." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // Fix for browser extensions attempting to assign window.fetch when it only has a getter
+      (function() {
+        try {
+          const originalFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          let currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(fn) {
+              currentFetch = fn;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (_) {}
+
+        // Prevent external extension errors from breaking page scripts
+        window.addEventListener('error', function(event) {
+          if (event && event.filename && event.filename.startsWith('chrome-extension://')) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

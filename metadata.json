@@ -1,0 +1,6 @@
+{
+  "name": "Systèmes Décisionnels M201 - Synthèse & Présentation Interactive",
+  "description": "Synthèse de cours structurée et présentation interactive du module M201 : Statistiques décisionnelles, détection des anomalies, Machine Learning Naive Bayes, simulation Monte Carlo, langage R et Data Visualisation avancée.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
